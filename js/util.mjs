@@ -1,8 +1,8 @@
 import { audio } from "./audio.mjs";
 import { theme } from "./theme.mjs";
-import { comment } from "./comment.mjs";
-import { storage } from "./storage.mjs";
-import { request, HTTP_GET } from "./request.mjs";
+// import { comment } from "./comment.mjs";
+// import { storage } from "./storage.mjs";
+// import { request, HTTP_GET } from "./request.mjs";
 
 export const util = (() => {
 
@@ -167,18 +167,18 @@ export const util = (() => {
         })();
     };
 
-    const storeConfig = async (token) => {
-        const config = storage('config');
-        return await request(HTTP_GET, '/api/config')
-            .token(token)
-            .then((res) => {
-                for (let [key, value] of Object.entries(res.data)) {
-                    config.set(key, value);
-                }
+    // const storeConfig = async (token) => {
+    //     const config = storage('config');
+    //     return await request(HTTP_GET, '/api/config')
+    //         .token(token)
+    //         .then((res) => {
+    //             for (let [key, value] of Object.entries(res.data)) {
+    //                 config.set(key, value);
+    //             }
 
-                return res.code;
-            });
-    };
+    //             return res.code;
+    //         });
+    // };
 
     const open = async (button) => {
         button.disabled = true;
@@ -188,21 +188,21 @@ export const util = (() => {
         audio.play();
         document.querySelector('body').style.overflowY = 'scroll';
 
-        if (localStorage.getItem('alertClosed')) {
-            document.getElementById('information').style.display = 'none';
-        }
+        // if (localStorage.getItem('alertClosed')) {
+        //     document.getElementById('information').style.display = 'none';
+        // }
 
         opacity('welcome', 0.025);
         animation();
         countDownDate();
         audio.showButton();
 
-        const token = document.querySelector('body').getAttribute('data-key');
-        storage('session').set('token', token);
-        const status = await storeConfig(token);
-        if (status === 200) {
-            await comment.comment();
-        }
+        // const token = document.querySelector('body').getAttribute('data-key');
+        // storage('session').set('token', token);
+        // const status = await storeConfig(token);
+        // if (status === 200) {
+        //     await comment.comment();
+        // }
     };
 
     return {
